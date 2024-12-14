@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title> Лаб. работа № 8</title>
+		<script>
+			function checkForm_task1(form) {
+				let reg_exp = /^[\+\-]?\d+\d$/;
+				alert(form.number.value.match(reg_exp) ? "Успех" : "Неудача");
+				return false;
+			}
+			
+			function checkForm_task2(form) {
+				let reg_exp = new RegExp("^[\\+\\-]?\\d\\d?$");
+				alert("До test:\nsource = " + reg_exp.source + "\nlastIndex = " + reg_exp.lastIndex);
+				alert("test: " + reg_exp.test(form.temperature.value)); // Возвращает булевское значение - найдено ли совпадение
+				alert("После test:\nsource = " + reg_exp.source + "\nlastIndex = " + reg_exp.lastIndex);
+				alert("exec: " + reg_exp.exec(form.temperature.value)); // Возвращает массив результатов сравнения, либо null, если совпадений не найдено
+				alert("После exec:\nsource = " + reg_exp.source + "\nlastIndex = " + reg_exp.lastIndex);
+				return false;
+			}
+			
+			function checkForm_task3(form) {
+				let reg_exp = /([0-1]\d)\/([0-3]\d)\/(2\d{3})/;
+				let str = "Сегодня " + form.date.value.replace(reg_exp, '$2' + "." + '$1' + "." + '$3') + "!";
+				let elem = document.createElement("div");
+				elem.textContent = str;
+				document.body.prepend(elem);
+				return false;
+			}
+			
+			function checkForm_task4(form) {
+				let reg_exp_username = new RegExp("user_[A-Z0-9]{4}(?!.)");
+				let reg_exp_password = new RegExp("^[a-z]{4,}(?!.)");
+				if (reg_exp_username.test(form.username.value) && reg_exp_password.test(form.password.value)) {
+					alert("Принято!");
+					return false;
+				}
+				if (!reg_exp_username.test(form.username.value)) alert("Неправильный формат у имени пользователя");
+				if (!reg_exp_password.test(form.password.value)) alert("Неправильный формат пароля");
+				return false;
+			}
+		</script>
+	</head>
+	
+	<body>
+		<p> <b> Введите произвольное целое число: </b> </p>
+		<form onSubmit="return checkForm_task1(this)">
+			<input type="text" name="number">
+			<input type="submit" value="Проверить">
+		</form>
+		
+		<p> <b> Введите температуру: </b> </p>
+		<form onSubmit="return checkForm_task2(this)">
+			<input type="text" name="temperature">
+			<input type="submit" value="Проверить">
+		</form>
+		
+		<p> <b> Укажите дату: </b> </p>
+		<form onSubmit="return checkForm_task3(this)">
+			<input type="text" name="date" placeholder="мм/дд/гггг">
+			<input type="submit" value="Проверить">
+		</form>
+		
+		<p> <b> Регистрация пользователя: </b> </p>
+		<form onSubmit="return checkForm_task4(this)">
+			<p> Имя пользователя в формате user_XXXX, где каждый X — это либо заглавная латинская буква, либо цифра: </p>
+			<p> <input type="text" name="username" placeholder="Имя пользователя"> </p>
+			<p> Пароль должен состоять не менее, чем из 4 символов, и может содержать только строчные латинские буквы: </p>
+			<p> <input type="text" name="password" placeholder="Пароль"> </p>
+			<input type="submit" value="Проверить">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title> Добавить пользователя </title>
+        <script>
+            function checkForm(form) {
+                return ( form["password"].value == form["repeatedPassword"].value );
+            }
+        </script>
+    </head>
+
+    <body>
+        <p style="font-weight: bold;"> Добавление нового пользователя </p> 
+        <form action="add.php" method="post" onsubmit="return checkForm(this)">
+            <p> <input type="text" name="username" placeholder="Имя"> </p>
+            <p> <input type="password" name="password" placeholder="Пароль"> </p>
+            <p> <input type="password" name="repeatedPassword" placeholder="Повторить пароль"> </p>
+            <p> <input type="submit" value="Добавить пользователя"> </p>
+        </form>
+    </body>
+</html>
